@@ -16,11 +16,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Test with Gradle
-        uses: gradle/gradle-build-action@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
         with:
-          gradle-version: 8.3
-          arguments: build
+          gradle-version: 8.5
+      - name: Build with Gradle
+        uses: make build
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
