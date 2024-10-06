@@ -1,4 +1,4 @@
-name: self-check
+name: Java CI
 
 on: push
 
@@ -14,7 +14,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/gradle-build-action@v4
         with:
           gradle-version: 8.5
       - name: Build with Gradle
