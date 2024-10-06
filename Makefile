@@ -8,7 +8,7 @@ test:
 	./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	sudo ./gradlew jacocoTestReport
 
 dev:
 	./gradlew run
