@@ -23,6 +23,13 @@ repositories {
 }
 
 dependencies {
+	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+	implementation("org.instancio:instancio-junit:3.6.0")
+	implementation("net.datafaker:datafaker:2.0.2")
+	implementation("org.springframework.security:spring-security-crypto:6.3.3")
+	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+	implementation("org.mapstruct:mapstruct:1.5.5.Final")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
