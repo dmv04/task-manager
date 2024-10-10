@@ -23,6 +23,9 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+	testImplementation("org.springframework.security:spring-security-test")
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	implementation("org.instancio:instancio-junit:3.6.0")
 	implementation("net.datafaker:datafaker:2.0.2")
