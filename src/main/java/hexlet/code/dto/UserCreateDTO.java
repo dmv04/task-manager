@@ -14,9 +14,11 @@ public class UserCreateDTO {
     @Column(unique = true)
     @Email
     private String email;
+
     private String firstName;
+
     private String lastName;
-    @NotNull
-    @Size(min = 3, max = 100)
+
+    @Size(min = 3)
     private String password;
 }
