@@ -16,4 +16,7 @@ dev:
 local:
 	./gradlew bootRun --args='--spring.profiles.active=file'
 
+lint:
+	./gradlew checkstyleMain checkstyleTest
+
 .PHONY: build
