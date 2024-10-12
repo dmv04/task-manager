@@ -1,4 +1,4 @@
-package hexlet.code.utils;
+package hexlet.code.util;
 
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.model.User;
@@ -26,5 +26,9 @@ public class UserUtils {
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + userId + " not found"));
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         return user.getEmail().equals(authentication.getName());
+    }
+    public User getTestUser() {
+        return userRepository.findByEmail("hexlet@example.com")
+                .orElseThrow(() -> new RuntimeException("User doesn't exist"));
     }
 }

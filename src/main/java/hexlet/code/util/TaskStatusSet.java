@@ -1,4 +1,4 @@
-package hexlet.code.utils;
+package hexlet.code.util;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.stream.Collectors;
