@@ -17,7 +17,7 @@ import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(
-        uses = {JsonNullableMapper.class, ReferenceMapper.class},
+        uses = { JsonNullableMapper.class, ReferenceMapper.class },
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
@@ -30,29 +30,33 @@ public abstract class TaskMapper {
     @Mapping(source = "content", target = "description")
     @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "assigneeId", target = "assignee")
+    @Mapping(source = "taskLabelIds", target = "taskLabels")
     public abstract Task map(TaskCreateDTO dto);
 
     @Mapping(source = "name", target = "title")
     @Mapping(source = "description", target = "content")
     @Mapping(source = "taskStatus.slug", target = "status")
     @Mapping(source = "assignee.id", target = "assigneeId")
+    @Mapping(source = "taskLabels", target = "taskLabelIds")
     public abstract TaskDTO map(Task model);
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "content", target = "description")
     @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "assigneeId", target = "assignee")
+    @Mapping(source = "taskLabelIds", target = "taskLabels")
     public abstract Task map(TaskDTO dto);
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "content", target = "description")
     @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "assigneeId", target = "assignee")
+    @Mapping(source = "taskLabelIds", target = "taskLabels")
     public abstract void update(TaskUpdateDTO dto, @MappingTarget Task model);
 
     @Named("statusToTaskStatus")
     public TaskStatus statusToTaskStatus(String slug) {
         return taskStatusRepository.findBySlug(slug)
-                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + slug + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug '" + slug + "' not found"));
     }
 }

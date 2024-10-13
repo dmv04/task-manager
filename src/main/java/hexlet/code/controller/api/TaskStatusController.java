@@ -27,6 +27,7 @@ import java.util.List;
 public class TaskStatusController {
     @Autowired
     private TaskStatusRepository taskStatusRepository;
+
     @Autowired
     private TaskStatusMapper taskStatusMapper;
 
@@ -35,6 +36,7 @@ public class TaskStatusController {
         var taskStatuses = taskStatusRepository.findAll().stream()
                 .map(taskStatusMapper::map)
                 .toList();
+
         return ResponseEntity.status(HttpStatus.OK)
                 .header("X-Total-Count", String.valueOf(taskStatuses.size()))
                 .body(taskStatuses);
@@ -52,6 +54,7 @@ public class TaskStatusController {
     public TaskStatusDTO create(@RequestBody @Valid TaskStatusCreateDTO taskStatusData) {
         var taskStatus = taskStatusMapper.map(taskStatusData);
         taskStatusRepository.save(taskStatus);
+
         return taskStatusMapper.map(taskStatus);
     }
 
@@ -61,6 +64,7 @@ public class TaskStatusController {
                 .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with id " + id + " not found"));
         taskStatusMapper.update(taskStatusData, taskStatus);
         taskStatusRepository.save(taskStatus);
+
         return taskStatusMapper.map(taskStatus);
     }
 

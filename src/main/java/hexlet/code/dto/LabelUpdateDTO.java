@@ -3,24 +3,19 @@ package hexlet.code.dto;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
+import org.openapitools.jackson.nullable.JsonNullable;
+
+import java.util.Set;
 
 @Getter
 @Setter
-public class UserCreateDTO {
-
+public class LabelUpdateDTO {
     @NotNull
     @Column(unique = true)
-    @Email
-    private String email;
+    @Size(min = 3, max = 1000)
+    private JsonNullable<String> name;
 
-    private String firstName;
-
-    private String lastName;
-
-    @NotNull
-    @Size(min = 3, max = 100)
-    private String password;
+    private Set<JsonNullable<Long>> taskIds;
 }
