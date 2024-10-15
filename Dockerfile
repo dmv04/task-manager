@@ -1,8 +1,8 @@
-FROM eclipse-temurin:21-jdk
+FROM gradle:8.8.0-jdk21
 
-WORKDIR /
+WORKDIR /app
 
-COPY / .
+COPY . /app
 
 RUN gradle installDist
 
