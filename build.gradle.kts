@@ -55,7 +55,6 @@ tasks.jacocoTestReport { reports { xml.required.set(true) } }
 
 sentry {
 	includeSourceContext = true
-
 	org = "dmitryverchenko"
 	projectName = "java-spring-boot"
 	authToken = System.getenv("SENTRY_AUTH_TOKEN")
