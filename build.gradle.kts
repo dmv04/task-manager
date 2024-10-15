@@ -5,6 +5,7 @@ plugins {
 	id("org.springframework.boot") version "3.4.0-SNAPSHOT"
 	id("io.spring.dependency-management") version "1.1.6"
 	id("io.freefair.lombok") version "8.6"
+	id("io.sentry.jvm.gradle") version "4.11.0"
 }
 
 group = "hexlet.code"
@@ -51,3 +52,11 @@ tasks.withType<Test> {
 }
 
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
+
+sentry {
+	includeSourceContext = true
+
+	org = "dmitryverchenko"
+	projectName = "java-spring-boot"
+	authToken = System.getenv("SENTRY_AUTH_TOKEN")
+}
