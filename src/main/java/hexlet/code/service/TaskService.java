@@ -2,28 +2,31 @@ package hexlet.code.service;
 
 import hexlet.code.dto.TaskCreateDTO;
 import hexlet.code.dto.TaskDTO;
+import hexlet.code.dto.TaskParamsDTO;
 import hexlet.code.dto.TaskUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskMapper;
-import hexlet.code.repository.LabelRepository;
+import hexlet.code.model.Task;
 import hexlet.code.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import hexlet.code.specification.TaskSpecification;
+import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class TaskService {
-    @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
-    private LabelRepository labelRepository;
-    @Autowired
-    private TaskMapper taskMapper;
 
-    public List<TaskDTO> getAll() {
-        var tasks = taskRepository.findAll();
-        return tasks.stream()
+    private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
+    private final TaskSpecification specBuilder;
+
+    public List<TaskDTO> getAll(TaskParamsDTO params) {
+        Specification<Task> spec = specBuilder.build(params);
+
+        return taskRepository.findAll(spec).stream()
                 .map(taskMapper::map)
                 .toList();
     }
@@ -31,12 +34,14 @@ public class TaskService {
     public TaskDTO findById(Long id) {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
+
         return taskMapper.map(task);
     }
 
     public TaskDTO create(TaskCreateDTO taskData) {
         var task = taskMapper.map(taskData);
         taskRepository.save(task);
+
         return taskMapper.map(task);
     }
 
@@ -45,6 +50,7 @@ public class TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
         taskMapper.update(taskData, task);
         taskRepository.save(task);
+
         return taskMapper.map(task);
     }
 

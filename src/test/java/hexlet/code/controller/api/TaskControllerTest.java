@@ -6,6 +6,7 @@ import hexlet.code.dto.TaskDTO;
 import hexlet.code.dto.TaskUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskMapper;
+import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskRepository;
@@ -114,6 +115,31 @@ class TaskControllerTest {
         var actual = taskDTOS.stream().map(taskMapper::map).toList();
         var expected = taskRepository.findAll();
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
+    }
+
+    @Test
+    public void testFilteredIndex() throws Exception {
+        var titleCont = testTask.getName().substring(1);
+        var assigneeId = testTask.getAssignee().getId();
+        var status = testTask.getTaskStatus().getSlug();
+        var labelId = testTask.getTaskLabels().stream()
+                .map(Label::getId)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("testTask with id " + testTask.getId()
+                        + " has no 'taskLabels' field in the testFilteredIndex"));
+
+        System.out.println(testTask);
+
+        MvcResult result = mockMvc.perform(get("/api/tasks?titleCont=" + titleCont + "&assigneeId="
+                        + assigneeId + "&status=" + status + "&labelId=" + labelId).with(jwt()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+        assertThatJson(response.getContentAsString())
+                .isArray()
+                .hasSize(1);
     }
 
     @Test
