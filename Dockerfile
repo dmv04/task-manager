@@ -1,9 +1,11 @@
-FROM gradle:8.8.0-jdk21
+FROM gradle:jdk20
 
 WORKDIR /app
 
-COPY . /app
+COPY / .
 
 RUN gradle installDist
+
+EXPOSE 7070
 
 CMD ./build/install/app/bin/app
