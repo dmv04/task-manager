@@ -8,6 +8,7 @@ import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,9 @@ import java.util.List;
 public class TaskStatusController {
 
     private final TaskStatusRepository taskStatusRepository;
-    private final TaskStatusMapper taskStatusMapper;
+
+    @Autowired
+    private TaskStatusMapper taskStatusMapper;
 
     @GetMapping("/task_statuses")
     public ResponseEntity<List<TaskStatusDTO>> index() {
