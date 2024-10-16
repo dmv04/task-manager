@@ -20,7 +20,7 @@ Task Manager is a task management system similar to http://www.redmine.org/. Thi
 ![Screenshot from 2024-10-16 12-22-44](https://github.com/user-attachments/assets/2cb7837b-3cb6-4764-82a8-5e3187522491)
 
 
-### 3 You can add your own task statuses and labels
+### 3. You can add your own task statuses and labels
 
 ![Screenshot from 2024-10-16 12-23-51](https://github.com/user-attachments/assets/39840e6c-495a-4fd3-b96f-449ecf6e1202)
 
