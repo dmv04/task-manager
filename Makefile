@@ -10,11 +10,16 @@ test:
 report:
 	./gradlew jacocoTestReport
 
-dev:
-	./gradlew run
+app:
+	./gradlew bootRun --args='--spring.profiles.active=dev'
 
-local:
-	./gradlew bootRun --args='--spring.profiles.active=file'
+clean:
+	./gradlew clean
+
+build:
+	./gradlew clean build
+
+dev: app
 
 lint:
 	./gradlew checkstyleMain checkstyleTest
