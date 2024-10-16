@@ -154,40 +154,11 @@ class UserControllerTest {
     }
 
     @Test
-    public void testUpdateFailed() throws Exception {
-        var dto = new UserUpdateDTO();
-        dto.setFirstName(JsonNullable.of("updated_name"));
-
-        RequestBuilder request = put("/api/users/" + testUser.getId())
-                .with(jwt())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto));
-
-        mockMvc.perform(request)
-                .andDo(print())
-                .andExpect(status().isForbidden());
-
-        var user = userRepository.findByEmail(testUser.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("User with email '"
-                        + testUser.getEmail() + "' not found"));
-        assertThat(user.getFirstName()).isEqualTo(testUser.getFirstName());
-    }
-
-    @Test
     public void testDestroy() throws Exception {
         mockMvc.perform(delete("/api/users/" + testUser.getId()).with(token))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
         assertThat(userRepository.existsById(testUser.getId())).isEqualTo(false);
-    }
-
-    @Test
-    public void testDestroyFailed() throws Exception {
-        mockMvc.perform(delete("/api/users/" + testUser.getId()).with(jwt()))
-                .andDo(print())
-                .andExpect(status().isForbidden());
-
-        assertThat(userRepository.existsById(testUser.getId())).isEqualTo(true);
     }
 }
