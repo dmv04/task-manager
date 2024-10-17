@@ -36,7 +36,7 @@ public class LabelController {
     }
 
     @GetMapping("/labels/{id}")
-    public LabelDTO show(@PathVariable Long id) {
+    public LabelDTO show(@PathVariable long id) {
 
         return labelService.findById(id);
     }
@@ -49,14 +49,14 @@ public class LabelController {
     }
 
     @PutMapping("/labels/{id}")
-    public LabelDTO update(@RequestBody @Valid LabelUpdateDTO labelData, @PathVariable Long id) {
+    public LabelDTO update(@RequestBody @Valid LabelUpdateDTO labelData, @PathVariable long id) {
 
         return labelService.update(labelData, id);
     }
 
     @DeleteMapping("/labels/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable Long id) {
+    public void destroy(@PathVariable long id) {
 
         labelService.delete(id);
     }

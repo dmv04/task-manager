@@ -45,7 +45,7 @@ public class TaskStatusController {
     }
 
     @GetMapping("/task_statuses/{id}")
-    public TaskStatusDTO show(@PathVariable Long id) {
+    public TaskStatusDTO show(@PathVariable long id) {
         var taskStatus = taskStatusRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with id " + id + " not found"));
         return taskStatusMapper.map(taskStatus);
@@ -61,7 +61,7 @@ public class TaskStatusController {
     }
 
     @PutMapping("/task_statuses/{id}")
-    public TaskStatusDTO update(@RequestBody @Valid TaskStatusUpdateDTO taskStatusData, @PathVariable Long id) {
+    public TaskStatusDTO update(@RequestBody @Valid TaskStatusUpdateDTO taskStatusData, @PathVariable long id) {
         var taskStatus = taskStatusRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with id " + id + " not found"));
         taskStatusMapper.update(taskStatusData, taskStatus);
@@ -72,7 +72,7 @@ public class TaskStatusController {
 
     @DeleteMapping("/task_statuses/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable Long id) {
+    public void destroy(@PathVariable long id) {
         taskStatusRepository.deleteById(id);
     }
 }

@@ -12,13 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsManager {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User with email '" + email + "' not found"));
     }
+
     @Override
     public void createUser(UserDetails userData) {
         var user = new User();
@@ -27,6 +30,7 @@ public class CustomUserDetailsService implements UserDetailsManager {
         user.setPasswordDigest(hashedPassword);
         userRepository.save(user);
     }
+
     @Override
     public void updateUser(UserDetails user) {
         // TODO Auto-generated method stub
@@ -37,11 +41,13 @@ public class CustomUserDetailsService implements UserDetailsManager {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
+
     @Override
     public void changePassword(String oldPassword, String newPassword) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'changePassword'");
     }
+
     @Override
     public boolean userExists(String username) {
         // TODO Auto-generated method stub

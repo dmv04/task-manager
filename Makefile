@@ -11,7 +11,7 @@ report:
 	./gradlew jacocoTestReport
 
 app:
-	./gradlew bootRun --args='--spring.profiles.active=dev'
+	./gradlew run --args='--spring.profiles.active=development'
 
 clean:
 	./gradlew clean

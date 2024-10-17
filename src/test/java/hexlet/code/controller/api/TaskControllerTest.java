@@ -128,7 +128,6 @@ class TaskControllerTest {
                 .orElseThrow(() -> new RuntimeException("testTask with id " + testTask.getId()
                         + " has no 'taskLabels' field in the testFilteredIndex"));
 
-        System.out.println(testTask);
 
         MvcResult result = mockMvc.perform(get("/api/tasks?titleCont=" + titleCont + "&assigneeId="
                         + assigneeId + "&status=" + status + "&labelId=" + labelId).with(jwt()))
