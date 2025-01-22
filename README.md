@@ -1,4 +1,3 @@
-### Hexlet tests and linter status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/e502c06794231034bfad/maintainability)](https://codeclimate.com/github/DmitryVerchenko/java-project-99/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e502c06794231034bfad/test_coverage)](https://codeclimate.com/github/DmitryVerchenko/java-project-99/test_coverage)
 # Task Manager
