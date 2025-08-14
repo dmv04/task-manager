@@ -8,11 +8,11 @@ plugins {
 	id("io.sentry.jvm.gradle") version "4.11.0"
 }
 
-group = "hexlet.code"
+group = "io.github.dmv04"
 version = "0.0.1-SNAPSHOT"
 
 application {
-	mainClass.set("hexlet.code.AppApplication")
+	mainClass.set("io.github.dmv04.AppApplication")
 }
 
 java {
